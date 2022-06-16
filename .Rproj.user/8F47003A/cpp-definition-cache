@@ -1,0 +1,206 @@
+[
+    {
+        "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+        "file_last_write": 1653343301.0,
+        "definitions": [
+            {
+                "usr": "c:@F@indicatorFun#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "indicatorFun(int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 15,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@generateXi#I#I#I#I#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "generateXi(int, int, int, int, int, int, double)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 29,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rttrunc#I#d#1I#1I#1I#1I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rttrunc(int, double, const int, const int, const int, const int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 51,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rtnormal#I#1I#1I#1I#1I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rtnormal(int, const int, const int, const int, const int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 101,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rtPE#I#1d#1I#1I#1I#1I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rtPE(int, const double, const int, const int, const int, const int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 149,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rtPVII#I#1d#1d#1I#1I#1I#1I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rtPVII(int, const double, const double, const int, const int, const int, const int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 190,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@slash_g#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "slash_g(double, double, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 241,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@r8_epsilon#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r8_epsilon",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 247,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@BrentMethod#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "BrentMethod(double, double, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 251,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@rtslash#I#1d#1I#1I#1I#1I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rtslash(int, const double, const int, const int, const int, const int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 329,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@ginvCN#d#d#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ginvCN(double, double, int, double)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 370,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@rtCN#I#1d#1d#1I#1I#1I#1I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rtCN(int, const double, const double, const int, const int, const int, const int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 383,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@randomG#I#I#I#I#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "randomG(int, int, int, int, int, int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 425,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@tuniv#I#I#d#I#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "tuniv(int, int, double, int, int, int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 467,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@Tmoment#1I#1I#1d#1I#1I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Tmoment(const int, const int, const double, const int, const int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 517,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@uniNorm#I#I#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "uniNorm(int, int, int, int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 634,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@Nmoment#1I#1I#1I#1I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Nmoment(const int, const int, const int, const int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 657,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@PEmoment#1I#1I#1d#1I#1I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "PEmoment(const int, const int, const double, const int, const int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 724,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@PVIIuni#I#I#d#d#I#I#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "PVIIuni(int, int, double, double, int, int, int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 754,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@PVIImoment#1I#1I#1d#1d#1I#1I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "PVIImoment(const int, const int, const double, const double, const int, const int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 806,
+                "column": 12
+            },
+            {
+                "usr": "c:@F@wSlash#I#I#I#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "wSlash(int, int, int, double, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 925,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@Slashmoment#1I#1I#1d#1I#1I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Slashmoment(const int, const int, const double, const int, const int, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 937,
+                "column": 12
+            }
+        ]
+    }
+]
