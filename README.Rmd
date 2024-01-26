@@ -17,12 +17,12 @@ knitr::opts_chunk$set(
 
 ## The `relliptical R` package
 
-The `relliptical R` package offers random numbers generation from members of the truncated multivariate elliptical family of distribution such as the truncated versions of the Normal, Student-t, Pearson VII, Slash, Logistic, Kotz-type, among others. Particular distributions can be provided by specifying the density generating function. It also computes the first two moments (covariance matrix as well) for some particular distributions. For more details see [@valeriano2021moments].
+The `relliptical R` package offers random numbers generation from members of the truncated multivariate elliptical family of distribution such as the truncated versions of the Normal, Student-t, Laplace, Pearson VII, Slash, Logistic, Kotz-type, among others. Particular distributions can be provided by specifying the density generating function. It also computes the first two moments (covariance matrix as well) for some particular distributions. For more details see [@valeriano2021moments].
 
 Next, we will show the functions available in the package.
 
 ## Sampling random numbers
-The function `rtelliptical` generates observations from a truncated multivariate elliptical distribution with location parameter `mu`, scale matrix `Sigma`, lower and upper truncation points `lower` and `upper` via Slice Sampling algorithm [@neal2003slice] with Gibbs sampler [@robert2010introducing] steps. The `dist` argument represents the truncated distribution to be used. The values are `Normal`, `t`, `PE`, `PVII`, `Slash`, and `CN`, for the truncated Normal, Student-t, Power Exponential, Pearson VII, Slash, and Contaminated Normal distributions, respectively.
+The function `rtelliptical` generates observations from a truncated multivariate elliptical distribution with location parameter `mu`, scale matrix `Sigma`, lower and upper truncation points `lower` and `upper` via Slice Sampling algorithm [@neal2003slice] with Gibbs sampler [@robert2010introducing] steps. The `dist` argument represents the truncated distribution to be used. The values are `Normal`, `t`, `Laplace`, `PE`, `PVII`, `Slash`, and `CN`, for the truncated Normal, Student-t, Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distributions, respectively.
 
 In the following example, we generate $n = 10^5$ samples from the truncated bivariate Normal distribution.
 
