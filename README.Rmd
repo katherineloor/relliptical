@@ -143,7 +143,7 @@ mvtelliptical(a, b, mu, Sigma, "t", 0.80) # By default n=1e4
 
 As seen for the first scenario, some elements of the variance-covariance matrix are shown as `NaN`. Those are the cases where the moment does not exist (yes, some elements of the variance-covariance matrix may exist and others may not). It is well know that for a Student-t distribution its second moment exist if $\nu>2$, however, as studied by [@galarza2020moments], this condition is relaxed as the number of dimensions containing only finite truncation limits increases.
 
-It is worth mention that the Student-t distribution with $\nu > 0$ degrees of freedom is a particular case of the Pearson VII distribution with parameters $m > p/2$ and $\nu^* > 0$ when $m = (\nu+p)/2$ and $\nu^* = \nu$. 
+It is worth mention that the Student-$t$ distribution with $\nu > 0$ degrees of freedom is a particular case of the Pearson VII distribution with parameters $m > p/2$ and $\nu^* > 0$ when $m = (\nu+p)/2$ and $\nu^* = \nu$. 
 
 Finally, for comparison purposes, we compute the moments for a truncated Pearson VII distribution with parameters $\nu^* = \nu = 0.80$ and $m = (\nu + 3)/2 = 1.90$, which is equivalent to the Student-t distribution above, and their moments must be nearly equal.
 
