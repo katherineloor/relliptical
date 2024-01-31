@@ -17,12 +17,12 @@ knitr::opts_chunk$set(
 
 ## The `relliptical R` package
 
-The `relliptical R` package offers random numbers generation from members of the truncated multivariate elliptical family of distribution such as the truncated versions of the Normal, Student-t, Pearson VII, Slash, Logistic, Kotz-type, among others. Particular distributions can be provided by specifying the density generating function. It also computes the first two moments (covariance matrix as well) for some particular distributions. For more details see [@valeriano2021moments].
+The `relliptical R` package offers random numbers generation from members of the truncated multivariate elliptical family of distribution such as the truncated versions of the Normal, Student-t, Laplace, Pearson VII, Slash, Logistic, Kotz-type, among others. Particular distributions can be provided by specifying the density generating function. It also computes the first two moments (covariance matrix as well) for some particular distributions. For more details see [@valeriano2021moments].
 
 Next, we will show the functions available in the package.
 
 ## Sampling random numbers
-The function `rtelliptical` generates observations from a truncated multivariate elliptical distribution with location parameter `mu`, scale matrix `Sigma`, lower and upper truncation points `lower` and `upper` via Slice Sampling algorithm [@neal2003slice] with Gibbs sampler [@robert2010introducing] steps. The `dist` argument represents the truncated distribution to be used. The values are `Normal`, `t`, `PE`, `PVII`, `Slash`, and `CN`, for the truncated Normal, Student-t, Power Exponential, Pearson VII, Slash, and Contaminated Normal distributions, respectively.
+The function `rtelliptical` generates observations from a truncated multivariate elliptical distribution with location parameter `mu`, scale matrix `Sigma`, lower and upper truncation points `lower` and `upper` via Slice Sampling algorithm [@neal2003slice] with Gibbs sampler [@robert2010introducing] steps. The `dist` argument represents the truncated distribution to be used. The values are `Normal`, `t`, `Laplace`, `PE`, `PVII`, `Slash`, and `CN`, for the truncated Normal, Student-t, Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distributions, respectively.
 
 In the following example, we generate $n = 10^5$ samples from the truncated bivariate Normal distribution.
 
@@ -121,7 +121,7 @@ grid.arrange(grobs=acf.plot(sample3), top="Sample ACF with thinning = 3", nrow=1
 ```
 
 ## Mean and variance-covariance matrix
-For this purpose, we call the function `mvtelliptical()`, which returns the mean vector and variance-covariance matrix for some specific truncated elliptical distributions. The argument `dist` sets the distribution to be used and accepts the same values `Normal`, `t`, `PE`, `PVII`, `Slash`, and `CN` as before. Moments are computed through Monte Carlo method for the truncated variables and using properties of the conditional expectation for the non-truncated variables.
+For this purpose, we call the function `mvtelliptical()`, which returns the mean vector and variance-covariance matrix for some specific truncated elliptical distributions. The argument `dist` sets the distribution to be used and accepts the same values `Normal`, `t`, `Laplace`, `PE`, `PVII`, `Slash`, and `CN` as before. Moments are computed through Monte Carlo method for the truncated variables and using properties of the conditional expectation for the non-truncated variables.
 
 Next, we compute the moments for a random variable $X$ following a truncated 3-variate Student-t distribution with $\nu=0.8$ degrees of freedom. We will consider two scenarios: a first one with only one doubly truncated variable, and a second one with two doubly truncated variables.
 
@@ -130,10 +130,10 @@ Next, we compute the moments for a random variable $X$ following a truncated 3-v
 set.seed(5678)
 mu = c(0.1, 0.2, 0.3)
 Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow=length(mu), ncol=length(mu), byrow=TRUE)
-# Example 1: considering nu = 0.80 and one doubly truncated variable
-a = c(-0.8, -Inf, -Inf)
-b = c(0.5, 0.6, Inf)
-mvtelliptical(a, b, mu, Sigma, "t", 0.80)
+
+# Example 1: one doubly truncated student-t (nu = 0.80) and Laplace
+MC11 = mvtelliptical(a, b, mu, Sigma, "t", 0.80)
+MC12 = mvtelliptical(a, b, mu, Sigma, "Laplace")
 
 # Example 2: considering nu = 0.80 and two doubly truncated variables
 a = c(-0.8, -0.70, -Inf)
@@ -143,9 +143,10 @@ mvtelliptical(a, b, mu, Sigma, "t", 0.80) # By default n=1e4
 
 As seen for the first scenario, some elements of the variance-covariance matrix are shown as `NaN`. Those are the cases where the moment does not exist (yes, some elements of the variance-covariance matrix may exist and others may not). It is well know that for a Student-t distribution its second moment exist if $\nu>2$, however, as studied by [@galarza2020moments], this condition is relaxed as the number of dimensions containing only finite truncation limits increases.
 
-It is worth mention that the Student-t distribution with $\nu > 0$ degrees of freedom is a particular case of the Pearson VII distribution with parameters $m > p/2$ and $\nu^* > 0$ when $m = (\nu+p)/2$ and $\nu^* = \nu$. 
+It is worth mention that the Student-$t$ distribution with $\nu > 0$ degrees of freedom is a particular case of the Pearson VII distribution with parameters $m > p/2$ and $\nu^* > 0$ when $m = (\nu+p)/2$ and $\nu^* = \nu$. 
 
-Finally, for comparison purposes, we compute the moments for a truncated Pearson VII distribution with parameters $\nu^* = \nu = 0.80$ and $m = (\nu + 3)/2 = 1.90$, which is equivalent to the Student-t distribution above, and their moments must be nearly equal.
+Finally, for comparison purposes, we compute the moments for a doubly truncated Pearson VII distribution with parameters $\nu^* = \nu = 0.80$ and $m = (\nu + 3)/2 = 1.90$, which is equivalent to the Student-t distribution mentioned above. Therefore, their moments should be nearly equal.
+
 
 ```{r example5}
 # Truncated Pearson VII distribution
