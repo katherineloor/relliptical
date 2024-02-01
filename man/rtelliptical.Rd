@@ -154,7 +154,7 @@ ggMarginal(f1, type="histogram", fill="grey")
 
   \insertRef{robert2010introducing}{relliptical}
 
-  \insertRef{valeriano2021moments}{relliptical}
+  \insertRef{valeriano2023moments}{relliptical}
 }
 }
 \seealso{

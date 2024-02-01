@@ -95,7 +95,7 @@ MC32 = mvtelliptical(a, b, mu, Sigma, "Normal", n=1e6) # More precision
 
   \insertRef{galarza2020moments}{relliptical}
 
-  \insertRef{valeriano2021moments}{relliptical}
+  \insertRef{valeriano2023moments}{relliptical}
 }
 }
 \seealso{

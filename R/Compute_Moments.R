@@ -75,7 +75,7 @@
 #'
 #'   \insertRef{galarza2020moments}{relliptical}
 #'
-#'   \insertRef{valeriano2021moments}{relliptical}
+#'   \insertRef{valeriano2023moments}{relliptical}
 #' }
 #'
 #' @import Ryacas0

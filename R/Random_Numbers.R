@@ -132,7 +132,7 @@
 #'
 #'   \insertRef{robert2010introducing}{relliptical}
 #'
-#'   \insertRef{valeriano2021moments}{relliptical}
+#'   \insertRef{valeriano2023moments}{relliptical}
 #' }
 
 
