@@ -304,9 +304,9 @@ Neal, R. M. 2003. “Slice Sampling.” *Annals of Statistics*, 705–41.
 
 <div id="ref-robert2010introducing" class="csl-entry">
 
-Robert, C. P., and G. Casella. 2010. *Introducing <span
-class="nocase">Monte Carlo Methods with R</span>*. Vol. 18. New York:
-Springer.
+Robert, C. P., and G. Casella. 2010. *Introducing
+<span class="nocase">Monte Carlo Methods with R</span>*. Vol. 18. New
+York: Springer.
 
 </div>
 
