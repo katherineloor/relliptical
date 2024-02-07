@@ -1,7 +1,7 @@
 [
     {
         "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
-        "file_last_write": 1653343301.0,
+        "file_last_write": 1707260998.0,
         "definitions": [
             {
                 "usr": "c:@F@indicatorFun#I#",
@@ -115,7 +115,7 @@
                 "usr": "c:@F@randomG#I#I#I#I#I#I#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "randomG(int, int, int, int, int, int, int, int, int)",
+                "name": "randomG(int, int, int, int, int, Rcpp::Function, Rcpp::Function, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 425,
                 "column": 11

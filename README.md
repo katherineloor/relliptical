@@ -51,21 +51,16 @@ head(sample1)
 library(ggplot2)
 # Histogram and density for variable 1
 f1 = ggplot(data.frame(sample1), aes(x=X1)) + 
-  geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
-  geom_density(colour="red") + labs(x=bquote(X[1]), y="Density")
+  geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
+  geom_density(colour="red") + labs(x=bquote(X[1]), y="Density") + theme_bw()
 
 # Histogram and density for variable 2
 f2 = ggplot(data.frame(sample1), aes(x=X2)) + 
-  geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
-  geom_density(colour="red") + labs(x=bquote(X[2]), y="Density")
+  geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
+  geom_density(colour="red") + labs(x=bquote(X[2]), y="Density") + theme_bw()
 
 library(gridExtra)
 grid.arrange(f1, f2, nrow=1)
-#> Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
-#> ℹ Please use `after_stat(density)` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
 ```
 
 <img src="man/figures/README-example1-1.png" width="65%" style="display: block; margin: auto;" />
@@ -132,10 +127,9 @@ lower = c(-2, -2)
 upper = c(3, 2)
 sample4 = rtelliptical(n=1e4, mu, Sigma, lower, upper, gFun=function(t){ t^(-1/2)*exp(-2*t^(1/4)) })
 f1 = ggplot(data.frame(sample4), aes(x=X1, y=X2)) + geom_point(size=0.50) +
-     labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)")
+     labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)") + theme_bw()
 
 library(ggExtra)
-#> Warning: package 'ggExtra' was built under R version 4.2.3
 ggMarginal(f1, type="histogram", fill="grey")
 ```
 
@@ -146,18 +140,6 @@ correlated, so it may be of interest to study some ACF plots. Now, we
 study the sample from the bivariate logistic distribution.
 
 ``` r
-# Function for plotting the sample autocorrelation using ggplot2
-acf.plot = function(samples){
-  p = ncol(samples);   n = nrow(samples);   acf1 = list(p)
-  for (i in 1:p){
-    bacfdf = with(acf(samples[,i], plot=FALSE), data.frame(lag, acf))
-    acf1[[i]] = ggplot(data=bacfdf, aes(x=lag,y=acf)) + geom_hline(aes(yintercept=0)) +
-      geom_segment(aes(xend=lag, yend=0)) + labs(x="Lag", y="ACF", subtitle=bquote(X[.(i)])) +
-      geom_hline(yintercept=c(qnorm(0.975)/sqrt(n),-qnorm(0.975)/sqrt(n)), colour="red", linetype="twodash")
-  }
-  return (acf1)
-}
-
 grid.arrange(grobs=acf.plot(sample2), top="Sample ACF with no thinning", nrow=1)
 ```
 
@@ -199,34 +181,52 @@ variables.
 ``` r
 # Truncated Student-t distribution
 set.seed(5678)
-mu = c(0.1, 0.2, 0.3)
+mu    = c(0.1, 0.2, 0.3)
 Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow=length(mu), ncol=length(mu), byrow=TRUE)
 
-# Example 1: one doubly truncated student-t (nu = 0.80) and Laplace
-a = c(-0.8, -0.70, -Inf)
+# Example 1: one doubly truncated student-t (nu = 0.80)
+a = c(-0.8, -Inf, -Inf)
 b = c(0.5, 0.6, Inf)
-MC11 = mvtelliptical(a, b, mu, Sigma, "t", 0.80)
-MC12 = mvtelliptical(a, b, mu, Sigma, "Laplace")
+mvtelliptical(a, b, mu, Sigma, "t", 0.80)
+#> $EY
+#>             [,1]
+#> [1,] -0.11001805
+#> [2,] -0.54278399
+#> [3,] -0.01119847
+#> 
+#> $EYY
+#>            [,1]       [,2]       [,3]
+#> [1,] 0.13761136 0.09694152 0.04317817
+#> [2,] 0.09694152        NaN        NaN
+#> [3,] 0.04317817        NaN        NaN
+#> 
+#> $VarY
+#>            [,1]       [,2]       [,3]
+#> [1,] 0.12550739 0.03722548 0.04194614
+#> [2,] 0.03722548        NaN        NaN
+#> [3,] 0.04194614        NaN        NaN
 
 # Example 2: considering nu = 0.80 and two doubly truncated variables
+a = c(-0.8, -0.70, -Inf)
+b = c(0.5, 0.6, Inf)
 mvtelliptical(a, b, mu, Sigma, "t", 0.80) # By default n=1e4
 #> $EY
 #>             [,1]
-#> [1,] -0.08092918
-#> [2,]  0.01528924
-#> [3,]  0.19311867
+#> [1,] -0.08566441
+#> [2,]  0.01563586
+#> [3,]  0.19215627
 #> 
 #> $EYY
 #>             [,1]        [,2]       [,3]
-#> [1,] 0.127344627 0.006681403 0.01485783
-#> [2,] 0.006681403 0.120205722 0.04725742
-#> [3,] 0.014857830 0.047257420 1.14882160
+#> [1,] 0.126040187 0.005937196 0.01331868
+#> [2,] 0.005937196 0.119761635 0.04700108
+#> [3,] 0.013318682 0.047001083 1.14714388
 #> 
 #> $VarY
 #>             [,1]        [,2]       [,3]
-#> [1,] 0.120795095 0.007918749 0.03048677
-#> [2,] 0.007918749 0.119971962 0.04430478
-#> [3,] 0.030486766 0.044304783 1.11152678
+#> [1,] 0.118701796 0.007276632 0.02977964
+#> [2,] 0.007276632 0.119517155 0.04399655
+#> [3,] 0.029779636 0.043996554 1.11021985
 ```
 
 As seen for the first scenario, some elements of the variance-covariance
@@ -251,8 +251,8 @@ equal.
 ``` r
 # Truncated Pearson VII distribution
 set.seed(9876)
-a = c(-0.8, -0.70, -Inf)
-b = c(0.5, 0.6, Inf)
+a  = c(-0.8, -0.70, -Inf)
+b  = c(0.5, 0.6, Inf)
 mu = c(0.1, 0.2, 0.3)
 Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow=length(mu), ncol=length(mu), byrow=TRUE)
 mvtelliptical(a, b, mu, Sigma, "PVII", c(1.90,0.80), n=1e6) # n=1e6 more precision
@@ -304,9 +304,9 @@ Neal, R. M. 2003. “Slice Sampling.” *Annals of Statistics*, 705–41.
 
 <div id="ref-robert2010introducing" class="csl-entry">
 
-Robert, C. P., and G. Casella. 2010. *Introducing
-<span class="nocase">Monte Carlo Methods with R</span>*. Vol. 18. New
-York: Springer.
+Robert, C. P., and G. Casella. 2010. *Introducing <span
+class="nocase">Monte Carlo Methods with R</span>*. Vol. 18. New York:
+Springer.
 
 </div>
 

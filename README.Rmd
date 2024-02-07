@@ -26,7 +26,7 @@ The function `rtelliptical` generates observations from a truncated multivariate
 
 In the following example, we generate $n = 10^5$ samples from the truncated bivariate Normal distribution.
 
-```{r example1}
+```{r example1, fig.width=6, fig.height=3.5, fig.align='center'}
 library(relliptical)
 
 # Sampling from the Truncated Normal distribution
@@ -41,13 +41,13 @@ head(sample1)
 library(ggplot2)
 # Histogram and density for variable 1
 f1 = ggplot(data.frame(sample1), aes(x=X1)) + 
-  geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
-  geom_density(colour="red") + labs(x=bquote(X[1]), y="Density")
+  geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
+  geom_density(colour="red") + labs(x=bquote(X[1]), y="Density") + theme_bw()
 
 # Histogram and density for variable 2
 f2 = ggplot(data.frame(sample1), aes(x=X2)) + 
-  geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
-  geom_density(colour="red") + labs(x=bquote(X[2]), y="Density")
+  geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
+  geom_density(colour="red") + labs(x=bquote(X[2]), y="Density") + theme_bw()
 
 library(gridExtra)
 grid.arrange(f1, f2, nrow=1)
@@ -77,7 +77,7 @@ $$g(t) = t^{N-1} e^{-r t^s}, \quad t\geq 0, \quad r>0, \quad s>0, \quad 2N+p>2.$
 
 As required, this function is strictly decreasing when $(2-p)/2 < N \leq 1$, see [@fang2018symmetric].
 
-```{r example3}
+```{r example3, fig.width=6, fig.height=3.5, fig.align='center'}
 # Sampling from the Truncated Kotz-type distribution
 set.seed(9876)
 mu  = c(0, 0)
@@ -86,7 +86,7 @@ lower = c(-2, -2)
 upper = c(3, 2)
 sample4 = rtelliptical(n=1e4, mu, Sigma, lower, upper, gFun=function(t){ t^(-1/2)*exp(-2*t^(1/4)) })
 f1 = ggplot(data.frame(sample4), aes(x=X1, y=X2)) + geom_point(size=0.50) +
-     labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)")
+     labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)") + theme_bw()
 
 library(ggExtra)
 ggMarginal(f1, type="histogram", fill="grey")
@@ -94,7 +94,7 @@ ggMarginal(f1, type="histogram", fill="grey")
 
 Since the generating process uses an MCMC method, observations will be correlated, so it may be of interest to study some ACF plots. Now, we study the sample from the bivariate logistic distribution.
 
-```{r example2.0}
+```{r echo=FALSE}
 # Function for plotting the sample autocorrelation using ggplot2
 acf.plot = function(samples){
   p = ncol(samples);   n = nrow(samples);   acf1 = list(p)
@@ -102,17 +102,19 @@ acf.plot = function(samples){
     bacfdf = with(acf(samples[,i], plot=FALSE), data.frame(lag, acf))
     acf1[[i]] = ggplot(data=bacfdf, aes(x=lag,y=acf)) + geom_hline(aes(yintercept=0)) +
       geom_segment(aes(xend=lag, yend=0)) + labs(x="Lag", y="ACF", subtitle=bquote(X[.(i)])) +
-      geom_hline(yintercept=c(qnorm(0.975)/sqrt(n),-qnorm(0.975)/sqrt(n)), colour="red", linetype="twodash")
+      geom_hline(yintercept=c(qnorm(0.975)/sqrt(n),-qnorm(0.975)/sqrt(n)), colour="red", linetype="twodash") + theme_bw()
   }
   return (acf1)
 }
+```
 
+```{r example2.0, fig.width=6, fig.height=3.5, fig.align='center'}
 grid.arrange(grobs=acf.plot(sample2), top="Sample ACF with no thinning", nrow=1)
 ```
 
 Autocorrelation can be decimated by setting the `thinning` argument. The thinning factor reduces the autocorrelation of the random points in the Gibbs sampling process. Thinning consists in picking separated points from the sample, at each k-th step. As natural, this value must be an integer greater than or equal to 1.
 
-```{r example2.1}
+```{r example2.1, fig.width=6, fig.height=3.5, fig.align='center'}
 # Sample autocorrelation with thinning = 3
 set.seed(8768)
 sample3 = rtelliptical(n=1e4, mu, Sigma, lower, upper, dist=NULL, expr="exp(1)^(-t)/(1+exp(1)^(-t))^2", 
@@ -128,16 +130,17 @@ Next, we compute the moments for a random variable $X$ following a truncated 3-v
 ```{r example4}
 # Truncated Student-t distribution
 set.seed(5678)
-mu = c(0.1, 0.2, 0.3)
+mu    = c(0.1, 0.2, 0.3)
 Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow=length(mu), ncol=length(mu), byrow=TRUE)
 
-# Example 1: one doubly truncated student-t (nu = 0.80) and Laplace
-a = c(-0.8, -0.70, -Inf)
+# Example 1: one doubly truncated student-t (nu = 0.80)
+a = c(-0.8, -Inf, -Inf)
 b = c(0.5, 0.6, Inf)
-MC11 = mvtelliptical(a, b, mu, Sigma, "t", 0.80)
-MC12 = mvtelliptical(a, b, mu, Sigma, "Laplace")
+mvtelliptical(a, b, mu, Sigma, "t", 0.80)
 
 # Example 2: considering nu = 0.80 and two doubly truncated variables
+a = c(-0.8, -0.70, -Inf)
+b = c(0.5, 0.6, Inf)
 mvtelliptical(a, b, mu, Sigma, "t", 0.80) # By default n=1e4
 ```
 
@@ -151,8 +154,8 @@ Finally, for comparison purposes, we compute the moments for a doubly truncated 
 ```{r example5}
 # Truncated Pearson VII distribution
 set.seed(9876)
-a = c(-0.8, -0.70, -Inf)
-b = c(0.5, 0.6, Inf)
+a  = c(-0.8, -0.70, -Inf)
+b  = c(0.5, 0.6, Inf)
 mu = c(0.1, 0.2, 0.3)
 Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow=length(mu), ncol=length(mu), byrow=TRUE)
 mvtelliptical(a, b, mu, Sigma, "PVII", c(1.90,0.80), n=1e6) # n=1e6 more precision
