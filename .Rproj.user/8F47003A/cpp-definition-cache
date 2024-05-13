@@ -1,7 +1,7 @@
 [
     {
         "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
-        "file_last_write": 1653343301.0,
+        "file_last_write": 1707260998.0,
         "definitions": [
             {
                 "usr": "c:@F@indicatorFun#I#",
@@ -10,52 +10,58 @@
                 "name": "indicatorFun(int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 15,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@generateXi#I#I#I#I#I#I#d#",
+                "usr": "c:@F@generateXi#I#$@N@arma@S@Mat>#i#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S1_#S1_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "generateXi(int, int, int, int, int, int, double)",
+                "name": "generateXi(int, arma::umat, arma::vec, arma::mat, arma::vec, arma::vec, double)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 29,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
-                "usr": "c:@F@rttrunc#I#d#1I#1I#1I#1I#I#I#",
+                "usr": "c:@F@rttrunc#I#d#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1S0_#1S0_#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "rttrunc(int, double, const int, const int, const int, const int, int, int)",
+                "name": "rttrunc(int, double, const arma::vec, const arma::mat, const arma::vec, const arma::vec, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 51,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
-                "usr": "c:@F@rtnormal#I#1I#1I#1I#1I#I#I#",
+                "usr": "c:@F@rtnormal#I#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1S0_#1S0_#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "rtnormal(int, const int, const int, const int, const int, int, int)",
+                "name": "rtnormal(int, const arma::vec, const arma::mat, const arma::vec, const arma::vec, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 101,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
-                "usr": "c:@F@rtPE#I#1d#1I#1I#1I#1I#I#I#",
+                "usr": "c:@F@rtPE#I#1d#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1S0_#1S0_#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "rtPE(int, const double, const int, const int, const int, const int, int, int)",
+                "name": "rtPE(int, const double, const arma::vec, const arma::mat, const arma::vec, const arma::vec, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 149,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
-                "usr": "c:@F@rtPVII#I#1d#1d#1I#1I#1I#1I#I#I#",
+                "usr": "c:@F@rtPVII#I#1d#1d#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1S0_#1S0_#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "rtPVII(int, const double, const double, const int, const int, const int, const int, int, int)",
+                "name": "rtPVII(int, const double, const double, const arma::vec, const arma::mat, const arma::vec, const arma::vec, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 190,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
                 "usr": "c:@F@slash_g#d#d#I#",
@@ -64,7 +70,8 @@
                 "name": "slash_g(double, double, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 241,
-                "column": 8
+                "column": 8,
+                "hidden": false
             },
             {
                 "usr": "c:@F@r8_epsilon#",
@@ -73,7 +80,8 @@
                 "name": "r8_epsilon",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 247,
-                "column": 8
+                "column": 8,
+                "hidden": false
             },
             {
                 "usr": "c:@F@BrentMethod#d#d#I#",
@@ -82,16 +90,18 @@
                 "name": "BrentMethod(double, double, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 251,
-                "column": 8
+                "column": 8,
+                "hidden": false
             },
             {
-                "usr": "c:@F@rtslash#I#1d#1I#1I#1I#1I#I#I#",
+                "usr": "c:@F@rtslash#I#1d#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1S0_#1S0_#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "rtslash(int, const double, const int, const int, const int, const int, int, int)",
+                "name": "rtslash(int, const double, const arma::vec, const arma::mat, const arma::vec, const arma::vec, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 329,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
                 "usr": "c:@F@ginvCN#d#d#I#d#",
@@ -100,107 +110,150 @@
                 "name": "ginvCN(double, double, int, double)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 370,
-                "column": 8
+                "column": 8,
+                "hidden": false
             },
             {
-                "usr": "c:@F@rtCN#I#1d#1d#1I#1I#1I#1I#I#I#",
+                "usr": "c:@F@rtCN#I#1d#1d#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1S0_#1S0_#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "rtCN(int, const double, const double, const int, const int, const int, const int, int, int)",
+                "name": "rtCN(int, const double, const double, const arma::vec, const arma::mat, const arma::vec, const arma::vec, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 383,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
-                "usr": "c:@F@randomG#I#I#I#I#I#I#I#I#I#",
+                "usr": "c:@F@randomG#I#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S0_#S0_#$@N@Rcpp@S@Function_Impl>#@N@Rcpp@ST>1#T@PreserveStorage#S2_#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "randomG(int, int, int, int, int, int, int, int, int)",
+                "name": "randomG(int, arma::vec, arma::mat, arma::vec, arma::vec, Rcpp::Function, Rcpp::Function, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 425,
-                "column": 11
+                "column": 11,
+                "hidden": false
             },
             {
-                "usr": "c:@F@tuniv#I#I#d#I#I#I#I#I#I#",
+                "usr": "c:@F@tuniv#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#d#S0_#S0_#I#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "tuniv(int, int, double, int, int, int, int, int, int)",
+                "name": "tuniv(arma::vec, arma::mat, double, arma::vec, arma::vec, int, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 467,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@Tmoment#1I#1I#1d#1I#1I#I#I#I#",
+                "usr": "c:@F@Tmoment#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1d#1S0_#1S0_#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "Tmoment(const int, const int, const double, const int, const int, int, int, int)",
+                "name": "Tmoment(const arma::vec, const arma::mat, const double, const arma::vec, const arma::vec, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 517,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@uniNorm#I#I#I#I#I#I#I#",
+                "usr": "c:@F@uniNorm#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S0_#S0_#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "uniNorm(int, int, int, int, int, int, int)",
+                "name": "uniNorm(arma::vec, arma::mat, arma::vec, arma::vec, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 634,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@Nmoment#1I#1I#1I#1I#I#I#I#",
+                "usr": "c:@F@Nmoment#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1S0_#1S0_#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "Nmoment(const int, const int, const int, const int, int, int, int)",
+                "name": "Nmoment(const arma::vec, const arma::mat, const arma::vec, const arma::vec, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 657,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@PEmoment#1I#1I#1d#1I#1I#I#I#I#",
+                "usr": "c:@F@PEmoment#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1d#1S0_#1S0_#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "PEmoment(const int, const int, const double, const int, const int, int, int, int)",
+                "name": "PEmoment(const arma::vec, const arma::mat, const double, const arma::vec, const arma::vec, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 724,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@PVIIuni#I#I#d#d#I#I#I#I#I#I#",
+                "usr": "c:@F@PVIIuni#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#d#d#S0_#S0_#I#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "PVIIuni(int, int, double, double, int, int, int, int, int, int)",
+                "name": "PVIIuni(arma::vec, arma::mat, double, double, arma::vec, arma::vec, int, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 754,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@PVIImoment#1I#1I#1d#1d#1I#1I#I#I#I#",
+                "usr": "c:@F@PVIImoment#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1d#1d#1S0_#1S0_#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "PVIImoment(const int, const int, const double, const double, const int, const int, int, int, int)",
+                "name": "PVIImoment(const arma::vec, const arma::mat, const double, const double, const arma::vec, const arma::vec, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 806,
-                "column": 12
+                "column": 12,
+                "hidden": false
             },
             {
-                "usr": "c:@F@wSlash#I#I#I#d#I#",
+                "usr": "c:@F@wSlash#$@N@arma@S@Mat>#d#$@N@arma@S@Col>#d#S0_#d#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "wSlash(int, int, int, double, int)",
+                "name": "wSlash(arma::mat, arma::vec, arma::mat, double, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 925,
-                "column": 8
+                "column": 8,
+                "hidden": false
             },
             {
-                "usr": "c:@F@Slashmoment#1I#1I#1d#1I#1I#I#I#I#",
+                "usr": "c:@F@Slashmoment#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1d#1S0_#1S0_#I#I#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "Slashmoment(const int, const int, const double, const int, const int, int, int, int)",
+                "name": "Slashmoment(const arma::vec, const arma::mat, const double, const arma::vec, const arma::vec, int, int, int)",
                 "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
                 "line": 937,
-                "column": 12
+                "column": 12,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@dmvnorm1#&1$@N@arma@S@Mat>#d#&1$@N@arma@S@Row>#d#S0_#1b#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "dmvnorm1(const arma::mat &, const arma::rowvec &, const arma::mat &, const bool)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 988,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@CNunivar#$@N@arma@S@Col>#d#S0_#d#d#S0_#S0_#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "CNunivar(arma::vec, arma::vec, double, double, arma::vec, arma::vec, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 1005,
+                "column": 12,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@CNmoment#1$@N@arma@S@Col>#d#1$@N@arma@S@Mat>#d#1d#1d#1S0_#1S0_#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "CNmoment(const arma::vec, const arma::mat, const double, const double, const arma::vec, const arma::vec, int, int, int)",
+                "file": "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/src/Functions.cpp",
+                "line": 1045,
+                "column": 12,
+                "hidden": false
             }
-        ]
+        ],
+        "hidden": false
     }
 ]

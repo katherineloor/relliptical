@@ -12,7 +12,7 @@
 #' @param Sigma numeric positive definite matrix with dimension \eqn{p}x\eqn{p} representing the
 #' scale parameter.
 #' @param dist represents the truncated distribution to be used. The values are \code{'Normal'},
-#' \code{'t'}, \code{t}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
+#' \code{'t'}, \code{'Laplace'}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
 #' Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distributions, respectively.
 #' @param nu additional parameter or vector of parameters depending on the
 #' density generating function. See Details.
@@ -75,7 +75,7 @@
 #'
 #'   \insertRef{galarza2020moments}{relliptical}
 #'
-#'   \insertRef{valeriano2021moments}{relliptical}
+#'   \insertRef{valeriano2023moments}{relliptical}
 #' }
 #'
 #' @import Ryacas0

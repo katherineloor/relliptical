@@ -73,13 +73,13 @@
 #'
 #' # Histogram and density for variable 1
 #' ggplot(data.frame(sample1), aes(x=X1)) +
-#'    geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
-#'    geom_density(color="red") + labs(x=bquote(X[1]), y="Density")
+#'    geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
+#'    geom_density(color="red") + labs(x=bquote(X[1]), y="Density") + theme_bw()
 #'
 #' # Histogram and density for variable 2
 #' ggplot(data.frame(sample1), aes(x=X2)) +
-#'    geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
-#'    geom_density(color="red") + labs(x=bquote(X[2]), y="Density")
+#'    geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
+#'    geom_density(color="red") + labs(x=bquote(X[2]), y="Density") + theme_bw()
 #'
 #' \donttest{
 #' # Example 2: Sampling from the Truncated Logistic distribution
@@ -91,7 +91,7 @@
 #'    bacfdf = with(acf(samples[,i], plot=FALSE), data.frame(lag, acf))
 #'    acf1[[i]] = ggplot(data=bacfdf, aes(x=lag,y=acf)) + geom_hline(aes(yintercept=0)) +
 #'      geom_segment(aes(xend=lag, yend=0)) + labs(x="Lag", y="ACF", subtitle=bquote(X[.(i)])) +
-#'      geom_hline(yintercept=c(q1,-q1), color="red", linetype="twodash")
+#'      geom_hline(yintercept=c(q1,-q1), color="red", linetype="twodash") + theme_bw()
 #'  }
 #'  return (acf1)
 #' }
@@ -119,7 +119,7 @@
 #' upper = c(3, 2)
 #' sample4 = rtelliptical(2000, mu, Sigma, lower, upper, gFun=function(t){t^(-1/2)*exp(-2*t^(1/4))})
 #' f1 = ggplot(data.frame(sample4), aes(x=X1,y=X2)) + geom_point(size=0.50) +
-#'      labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)")
+#'      labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)") + theme_bw()
 #' ggMarginal(f1, type="histogram", fill="grey")
 #'
 
@@ -132,7 +132,7 @@
 #'
 #'   \insertRef{robert2010introducing}{relliptical}
 #'
-#'   \insertRef{valeriano2021moments}{relliptical}
+#'   \insertRef{valeriano2023moments}{relliptical}
 #' }
 
 

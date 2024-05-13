@@ -1,23 +1,25 @@
 {
     "args": [
-        "-std=gnu++11",
-        "-IC:/PROGRA~1/R/R-41~1.3/include",
+        "-std=gnu++17",
+        "-IC:/PROGRA~1/R/R-43~1.2/include",
         "-DNDEBUG",
         "-fopenmp",
-        "-IC:/Users/55199/OneDrive/Documents/R/win-library/4.1/RcppArmadillo/include",
-        "-IC:/Users/55199/OneDrive/Documents/R/win-library/4.1/Rcpp/include",
+        "-IC:/Users/55199/AppData/Local/R/win-library/4.3/RcppArmadillo/include",
+        "-IC:/Users/55199/AppData/Local/R/win-library/4.3/Rcpp/include",
         "-nostdinc",
-        "-IC:/RBuildTools/4.0/mingw64/include/c++/8.3.0",
-        "-IC:/RBuildTools/4.0/mingw64/include/c++/8.3.0/x86_64-w64-mingw32",
-        "-IC:/RBuildTools/4.0/mingw64/include/c++/8.3.0/backward",
-        "-IC:/RBuildTools/4.0/mingw64/lib/gcc/x86_64-w64-mingw32/8.3.0/include",
-        "-IC:/RBuildTools/4.0/mingw64/include",
-        "-IC:/RBuildTools/4.0/mingw64/lib/gcc/x86_64-w64-mingw32/8.3.0/include-fixed",
-        "-IC:/RBuildTools/4.0/mingw64/x86_64-w64-mingw32/include"
+        "-D__GNUC__=5",
+        "-D__GNUC_MINOR__=0",
+        "-D__GNUC_PATCHLEVEL__=2",
+        "-IC:/rtools42/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/10.3.0/include/c++",
+        "-IC:/rtools42/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/10.3.0/include/c++/x86_64-w64-mingw32.static.posix",
+        "-IC:/rtools42/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/10.3.0/include/c++/backward",
+        "-IC:/rtools42/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/10.3.0/include",
+        "-IC:/rtools42/x86_64-w64-mingw32.static.posix/include",
+        "-IC:/rtools42/x86_64-w64-mingw32.static.posix/lib/gcc/x86_64-w64-mingw32.static.posix/10.3.0/include-fixed"
     ],
     "pch": "RcppArmadillo",
     "is_cpp": true,
-    "hash": "165334332016305182761630518276",
-    "compiler": "2977220399556355138",
-    "rversion": "4.1.3"
+    "hash": "1692227570170726043917072653261707265470",
+    "compiler": "6762244524107556826",
+    "rversion": "4.3.2"
 }
