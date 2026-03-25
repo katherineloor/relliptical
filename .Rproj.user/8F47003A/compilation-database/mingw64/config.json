@@ -1,0 +1,26 @@
+{
+    "args": [
+        "-std=gnu++17",
+        "-IC:/PROGRA~1/R/R-43~1.2/include",
+        "-DNDEBUG",
+        "-fopenmp",
+        "-IC:/Users/55199/AppData/Local/R/win-library/4.3/RcppArmadillo/include",
+        "-IC:/Users/55199/AppData/Local/R/win-library/4.3/Rcpp/include",
+        "-DEIGEN_DONT_VECTORIZE",
+        "-nostdinc",
+        "-Ic:/rtools43/x86_64~1.pos/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include/c++",
+        "-Ic:/rtools43/x86_64~1.pos/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include/c++/x86_64-w64-mingw32.static.posix",
+        "-Ic:/rtools43/x86_64~1.pos/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include/c++/backward",
+        "-Ic:/rtools43/x86_64~1.pos/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include",
+        "-Ic:/rtools43/x86_64~1.pos/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/../../../../include",
+        "-Ic:/rtools43/x86_64~1.pos/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include-fixed",
+        "-include",
+        "C:/Users/55199/OneDrive/Documents/GitHub/relliptical/.Rproj.user/8F47003A/compilation-database/mingw64/cpp-definitions.h"
+    ],
+    "pch": "RcppArmadillo",
+    "is_cpp": true,
+    "hash": "1692227570170726043917072653261707265470",
+    "compiler": "4947574074073276986",
+    "rversion": "4.3.2",
+    "dbversion": 4
+}

@@ -1,20 +1,17 @@
-# News for package relliptical
+# News for package 'relliptical'
 
-### relliptical 1.3.0 _(2024-02-10)_
+### relliptical 1.4.0 (2026-04)
 
-* Functions `rtelliptical` and `mvtelliptical` have been updated to support the truncated multivariate Laplace distribution.
+- The dependency on the Ryacas0 package was removed.
 
+### relliptical 1.2.0 (2022-05)
 
-### relliptical 1.2.0 _(2022-05-25)_
+- Some packages were removed from suggests (DESCRIPTION file).
 
-* Some packages were removed from suggests (DESCRIPTION file).
+### relliptical 0.9.0 (2021-11)
 
+- Functions _rtelliptical_ and _mvtelliptical_ were improved for the truncated multivariate Slash distribution.
 
-### relliptical 0.9.0 _(2021-11-27)_
+### relliptical 0.1.0 (2021-09)
 
-* Functions `rtelliptical` and `mvtelliptical` were improved for the truncated multivariate Slash distribution.
-
-
-### relliptical 0.1.0 _(2021-09-15)_
-
-* Initial release.
+- Initial release.

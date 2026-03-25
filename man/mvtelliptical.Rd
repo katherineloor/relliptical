@@ -19,8 +19,8 @@ mvtelliptical(lower, upper = rep(Inf, length(lower)), mu = rep(0,
 scale parameter.}
 
 \item{dist}{represents the truncated distribution to be used. The values are \code{'Normal'},
-\code{'t'}, \code{'Laplace'}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
-Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distributions, respectively.}
+\code{'t'}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
+Power Exponential, Pearson VII, Slash, and Contaminated Normal distributions, respectively.}
 
 \item{nu}{additional parameter or vector of parameters depending on the
 density generating function. See Details.}
@@ -39,27 +39,36 @@ It returns a list with three elements:
 }
 \description{
 This function approximates the mean vector and variance-covariance matrix for some specific truncated elliptical distributions.
-The argument \code{dist} sets the distribution to be used and accepts the values \code{Normal},
-\code{t}, \code{Laplace}, \code{PE}, \code{PVII}, \code{Slash}, and \code{CN}, for the truncated Normal, Student-t, Power Exponential,
-Pearson VII, Slash, and Contaminated Normal distribution, respectively. Moments are computed through Monte Carlo method for
-the truncated variables and using properties of the conditional expectation for the non-truncated variables.
+The argument \code{dist} specifies the distribution to be used and accepts
+the values \code{"Normal"}, \code{"t"}, \code{"PE"}, \code{"PVII"},
+\code{"Slash"}, and \code{"CN"}, corresponding to the truncated Normal,
+Student-t, Power Exponential, Pearson type VII, Slash, and Contaminated Normal
+distributions, respectively.
 }
 \details{
-This function also considers the univariate case. The argument \code{nu} is a parameter
-or vector of parameters depending on the density generating function (DGF). For the truncated
-Student-t, Power Exponential, and Slash distribution, \code{nu} is a positive number.
-For the truncated Pearson VII, \code{nu} is a vector with the first element greater than \eqn{p/2}
-and the second element a positive number. For the truncated Contaminated Normal distribution, \code{nu}
-is a vector of length 2 assuming values between 0 and 1.
+Moments associated with the truncated components are estimated using a
+Monte Carlo approach, while moments for the non-truncated components are
+obtained by exploiting properties of conditional expectation.
+
+This function also supports the univariate case. The argument \code{nu} denotes
+a parameter or a vector of parameters, depending on the underlying
+density generating function (DGF). For the truncated Student-t, Power Exponential, and Slash distributions,
+\code{nu} must be a positive scalar. For the truncated Pearson type VII distribution, \code{nu} is a vector of length two,
+where the first element must be greater than \eqn{p/2} and the second element
+must be strictly positive. For the truncated Contaminated Normal distribution, \code{nu} is a vector of length two
+with components taking values in the interval \eqn{(0,1)}.
 }
 \note{
-The Normal distribution is a particular case of the Power Exponential distribution when \code{nu = 1}.
-The Student-t distribution with \eqn{\nu} degrees of freedom results from the Pearson VII
-distribution when \code{nu = } ((\eqn{\nu}+p)/2, \eqn{\nu}).
+The Normal distribution is a special case of the Power Exponential distribution
+obtained when \code{nu = 1}. The Student-t distribution with \eqn{\nu} degrees of freedom
+arises as a particular case of the Pearson type VII distribution when
+\code{nu = } ((\eqn{\nu}+p)/2, \eqn{\nu}).
 
-In the Student-t distribution, if \code{nu >= 300}, the Normal case is considered.
-For Student-t distribution, the algorithm also supports degrees of freedom \code{nu <= 2}.
-For Pearson VII distribution, the algorithm supports values of \code{m <= (p+2)/2} (first element of \code{nu}).
+For the Student-t distribution, if \code{nu >= 300}, the Normal approximation is used.
+The algorithm also supports Student-t distributions with degrees of freedom
+\code{nu <= 2}. For the Pearson type VII distribution, the algorithm supports
+values of \code{m <= (p + 2)/2}, where \code{m} corresponds to the first component
+of \code{nu}.
 }
 \examples{
 # Truncated Student-t distribution
@@ -68,13 +77,14 @@ mu = c(0.1, 0.2, 0.3)
 Sigma = matrix(data = c(1,0.2,0.3,0.2,1,0.4,0.3,0.4,1), nrow=length(mu),
                ncol=length(mu), byrow=TRUE)
 
-# Example 1: one doubly truncated student-t (nu = 0.80) and Laplace
+# Example 1: considering nu = 0.80 and one doubly truncated variable
 a = c(-0.8, -Inf, -Inf)
 b = c(0.5, 0.6, Inf)
-MC11 = mvtelliptical(a, b, mu, Sigma, "t", 0.80) # Student-t
-MC12 = mvtelliptical(a, b, mu, Sigma, "Laplace") # Laplace
+MC11 = mvtelliptical(a, b, mu, Sigma, "t", 0.80)
 
-# Example 2: two doubly truncated student-t (nu = 0.80)
+# Example 2: considering nu = 0.80 and two doubly truncated variables
+a = c(-0.8, -0.70, -Inf)
+b = c(0.5, 0.6, Inf)
 MC12 = mvtelliptical(a, b, mu, Sigma, "t", 0.80) # By default n=1e4
 
 # Truncated Pearson VII distribution
@@ -82,11 +92,11 @@ set.seed(9876)
 MC21 = mvtelliptical(a, b, mu, Sigma, "PVII", c(1.90,0.80), n=1e6) # More precision
 c(MC12$EY); c(MC21$EY)
 MC12$VarY;  MC21$VarY
-
+\donttest{
 # Truncated Normal distribution
 set.seed(1234)
 MC31 = mvtelliptical(a, b, mu, Sigma, "Normal", n=1e4)
-MC32 = mvtelliptical(a, b, mu, Sigma, "Normal", n=1e6) # More precision
+MC32 = mvtelliptical(a, b, mu, Sigma, "Normal", n=1e6) # More precision}
 }
 \references{
 {
@@ -94,7 +104,7 @@ MC32 = mvtelliptical(a, b, mu, Sigma, "Normal", n=1e6) # More precision
 
   \insertRef{galarza2020moments}{relliptical}
 
-  \insertRef{valeriano2023moments}{relliptical}
+  \insertRef{valeriano2021moments}{relliptical}
 }
 }
 \seealso{

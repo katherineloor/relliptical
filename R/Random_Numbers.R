@@ -1,8 +1,9 @@
 #' Sampling Random Numbers from Truncated Multivariate Elliptical Distributions
 #'
-#' This function generates observations from a truncated multivariate elliptical distribution
-#' with location parameter \code{mu}, scale matrix \code{Sigma}, lower and upper
-#' truncation points \code{lower} and \code{upper} via Slice Sampling algorithm with Gibbs sampler steps.
+#' The sampling procedure is based on a Slice Sampling algorithm combined with
+#' Gibbs sampling steps. The distribution is characterized by a location parameter
+#' \code{mu}, a scale matrix \code{Sigma}, and lower and upper truncation bounds
+#' specified by \code{lower} and \code{upper}, respectively.
 #'
 #' @param n number of observations to generate. Must be an integer >= 1.
 #' @param mu numeric vector of length \eqn{p} representing the location parameter.
@@ -11,8 +12,8 @@
 #' @param lower vector of lower truncation points of length \eqn{p}.
 #' @param upper vector of upper truncation points of length \eqn{p}.
 #' @param dist represents the truncated distribution to be used. The values are \code{'Normal'},
-#' \code{'t'}, \code{'Laplace'}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
-#' Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distribution, respectively.
+#' \code{'t'}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
+#' Power Exponential, Pearson VII, Slash, and Contaminated Normal distribution, respectively.
 #' @param nu additional parameter or vector of parameters depending on the
 #' density generating function. See Details.
 #' @param expr a character with the density generating function. See Details.
@@ -22,35 +23,49 @@
 #' @param burn.in number of samples to be discarded as a burn-in phase.
 #' @param thinning factor for reducing the autocorrelation of random points.
 #'
-#' @details The \code{dist} argument represents the truncated distribution to be used. The values are
-#' \code{Normal}, \code{t}, \code{'t'}, \code{PE}, \code{PVII}, \code{Slash}, and \code{CN}, for the
-#' truncated Normal, Student-t, Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distribution,
-#' respectively.
+#' @details The argument \code{dist} specifies the truncated distribution to be used and
+#' accepts the values \code{"Normal"}, \code{"t"}, \code{"PE"}, \code{"PVII"},
+#' \code{"Slash"}, and \code{"CN"}, corresponding to the truncated Normal,
+#' Student-t, Power Exponential, Pearson type VII, Slash, and Contaminated Normal
+#' distributions, respectively.
 #'
-#' The argument \code{nu} is a parameter or vector of parameters depending on the density generating
-#' function (DGF). For the truncated Student-t, Power Exponential, and Slash distribution, \code{nu} is a
-#' positive number. For the truncated Pearson VII, \code{nu} is a vector with the first element greater than
-#' \eqn{p/2} and the second element a positive number. For the truncated Contaminated Normal distribution,
-#' \code{nu} is a vector of length 2 assuming values between 0 and 1.
+#' The argument \code{nu} denotes a parameter or a vector of parameters depending
+#' on the underlying density generating function (DGF). For the truncated
+#' Student-t, Power Exponential, and Slash distributions, \code{nu} must be a
+#' positive scalar. For the truncated Pearson type VII distribution, \code{nu}
+#' is a vector of length two, where the first element must be greater than
+#' \eqn{p/2} and the second element must be strictly positive. For the truncated
+#' Contaminated Normal distribution, \code{nu} is a vector of length two with
+#' components taking values in the interval \eqn{(0,1)}.
 #'
-#' This function also allows generating random numbers from other truncated elliptical distributions not specified
-#' in the \code{dist} argument, by supplying the density generating function (DGF) through arguments either
-#' \code{expr} or \code{gFun}. The DGF must be a non-negative and strictly decreasing function on \code{(0, Inf)}.
-#' The easiest way is to provide the DGF expression to argument \code{expr} as a character. The notation used in
-#' \code{expr} needs to be understood by package \code{Ryacas0}, and the environment of \code{R}. For instance,
-#' for the DGF \eqn{g(t)=e^{-t}}, the user must provide \code{expr = "exp(1)^(-t)"}. See that the function must depend
-#' only on variable \eqn{t}, and any additional parameter must be passed as a fixed value. For this case, when a character
-#' expression is provided to \code{expr}, the algorithm tries to compute a closed-form expression for the inverse function
-#' of \eqn{g(t)}, however, this is not always possible (a warning message is returned). See example 2.
+#' This function also supports random number generation from truncated elliptical
+#' distributions not explicitly listed in the \code{dist} argument by supplying
+#' the density generating function (DGF) through either the \code{expr} or
+#' \code{gFun} arguments. The DGF must be a non-negative and strictly decreasing
+#' function on \eqn{(0,\infty)}.
 #'
-#' If it was no possible to generate random samples by passing a character expression to \code{expr}, the user may provide
-#' a custom \code{R} function to the \code{gFun} argument. By default, its inverse function is approximated numerically,
-#' however, the user may also provide its inverse to the \code{ginvFun} argument to gain some computational time.
-#' When \code{gFun} is provided, arguments \code{dist} and \code{expr} are ignored.
+#' The simplest approach is to provide the DGF to the \code{expr} argument as a
+#' character string. The notation used in \code{expr} must be compatible with both
+#' the \pkg{Ryacas} package and the \pkg{R} evaluation environment. For example,
+#' for the DGF \eqn{g(t) = e^{-t}}, the user should specify
+#' \code{expr = "exp(-t)"}. The expression must depend only on the variable
+#' \eqn{t}; any additional parameters must be supplied as fixed values.
+#' When a character expression is provided via \code{expr}, the algorithm attempts
+#' to compute a closed-form expression for the inverse of \eqn{g(t)}. Since such an
+#' expression may not always exist, a warning is issued whenever the inversion
+#' cannot be obtained analytically (see Example 2).
 #'
-#' @note The Normal distribution is a particular case of the Power Exponential distribution when \code{nu = 1}.
-#' The Student-t distribution with \eqn{\nu} degrees of freedom results from the Pearson VII
-#' distribution when \code{nu = } ((\eqn{\nu}+p)/2, \eqn{\nu}).
+#' If random samples cannot be generated using a character expression supplied to
+#' \code{expr}, the user may instead provide a custom \pkg{R} function through the
+#' \code{gFun} argument. By default, the inverse of this function is approximated
+#' numerically; however, for improved computational efficiency, the user may
+#' optionally provide its inverse via the \code{ginvFun} argument. When \code{gFun}
+#' is supplied, the arguments \code{dist} and \code{expr} are ignored.
+#'
+#' @note The Normal distribution is a special case of the Power Exponential distribution
+#' obtained when \code{nu = 1}. The Student-t distribution with \eqn{\nu} degrees of
+#' freedom arises as a particular case of the Pearson type VII distribution when
+#' \code{nu = } ((\eqn{\nu}+p)/2, \eqn{\nu}).
 #'
 #' @return It returns a matrix of dimensions \eqn{n}x\eqn{p} with the random points sampled.
 #'
@@ -73,13 +88,15 @@
 #'
 #' # Histogram and density for variable 1
 #' ggplot(data.frame(sample1), aes(x=X1)) +
-#'    geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
-#'    geom_density(color="red") + labs(x=bquote(X[1]), y="Density") + theme_bw()
+#'    geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
+#'    geom_density(color="red") + labs(x=bquote(X[1]), y="Density") +
+#'    theme_bw()
 #'
 #' # Histogram and density for variable 2
 #' ggplot(data.frame(sample1), aes(x=X2)) +
-#'    geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
-#'    geom_density(color="red") + labs(x=bquote(X[2]), y="Density") + theme_bw()
+#'    geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
+#'    geom_density(color="red") + labs(x=bquote(X[2]), y="Density") +
+#'    theme_bw()
 #'
 #' \donttest{
 #' # Example 2: Sampling from the Truncated Logistic distribution
@@ -91,7 +108,8 @@
 #'    bacfdf = with(acf(samples[,i], plot=FALSE), data.frame(lag, acf))
 #'    acf1[[i]] = ggplot(data=bacfdf, aes(x=lag,y=acf)) + geom_hline(aes(yintercept=0)) +
 #'      geom_segment(aes(xend=lag, yend=0)) + labs(x="Lag", y="ACF", subtitle=bquote(X[.(i)])) +
-#'      geom_hline(yintercept=c(q1,-q1), color="red", linetype="twodash") + theme_bw()
+#'      geom_hline(yintercept=c(q1,-q1), color="red", linetype="twodash") +
+#'      theme_bw()
 #'  }
 #'  return (acf1)
 #' }
@@ -102,14 +120,14 @@
 #' lower = c(-2, -2)
 #' upper = c(3, 2)
 #' # Sample autocorrelation with no thinning
-#' sample2 = rtelliptical(10000, mu, Sigma, lower, upper, expr="exp(1)^(-t)/(1+exp(1)^(-t))^2")
+#' sample2 = rtelliptical(2000, mu, Sigma, lower, upper, expr="exp(-t)/(1+exp(-t))^2")
 #' grid.arrange(grobs=acf.plot(sample2), top="Logistic distribution with no thinning", nrow=1)
 #'
 #' # Sample autocorrelation with thinning = 3
-#' sample3 = rtelliptical(10000, mu, Sigma, lower, upper, expr="exp(1)^(-t)/(1+exp(1)^(-t))^2",
+#' sample3 = rtelliptical(2000, mu, Sigma, lower, upper, expr="exp(-t)/(1+exp(-t))^2",
 #'                        thinning=3)
 #' grid.arrange(grobs=acf.plot(sample3), top="Logistic distribution with thinning = 3", nrow=1)
-#'}
+#'
 #'
 #' # Example 3: Sampling from the Truncated Kotz-type distribution
 #' set.seed(5678)
@@ -119,8 +137,9 @@
 #' upper = c(3, 2)
 #' sample4 = rtelliptical(2000, mu, Sigma, lower, upper, gFun=function(t){t^(-1/2)*exp(-2*t^(1/4))})
 #' f1 = ggplot(data.frame(sample4), aes(x=X1,y=X2)) + geom_point(size=0.50) +
-#'      labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)") + theme_bw()
-#' ggMarginal(f1, type="histogram", fill="grey")
+#'      labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)") +
+#'      theme_bw()
+#' ggMarginal(f1, type="histogram", fill="grey")}
 #'
 
 #' @references{
@@ -132,7 +151,7 @@
 #'
 #'   \insertRef{robert2010introducing}{relliptical}
 #'
-#'   \insertRef{valeriano2023moments}{relliptical}
+#'   \insertRef{valeriano2021moments}{relliptical}
 #' }
 
 
@@ -182,7 +201,7 @@ rtelliptical = function(n=1e4, mu=rep(0,length(lower)), Sigma=diag(length(lower)
   # Validation of gFun
   if (is(gFun,"function")){
     p = length(c(mu))
-    quant = qchisq(0.999,df=p)
+    quant  = qchisq(0.999,df=p)
     g_fun2 = gFun
     if (!is.decreasing(g_fun2, x.bound=c(0,quant), step = 0.1)) stop ("gFun must be a decreasing function")
     if (g_fun2(quant) < 0) stop ("gFun must be a non-negative function")
@@ -190,7 +209,7 @@ rtelliptical = function(n=1e4, mu=rep(0,length(lower)), Sigma=diag(length(lower)
     # Validation of ginvFun
     if (is(ginvFun,"function")){
       g_inv2 = ginvFun
-      eval2 = g_fun2(quant)
+      eval2  = g_fun2(quant)
       if (!is.decreasing(g_inv2, x.bound=c(0,eval2), step=eval2/10)) stop ("ginvFun must be a decreasing function")
       seque = seq(1,round(quant),length.out=20)
       if (!all(abs(g_inv2(g_fun2(seque)) - c(seque)) < 1e-10)) stop ("ginvFun is not the inverse of gFun")
@@ -206,7 +225,7 @@ rtelliptical = function(n=1e4, mu=rep(0,length(lower)), Sigma=diag(length(lower)
 
   } else {
 
-    # Using Ryacas0 for a given function
+    # Using Ryacas for a given function
     if (!is.null(expr)){
       p = length(c(mu))
       quant = qchisq(0.999,df=p)
@@ -216,27 +235,53 @@ rtelliptical = function(n=1e4, mu=rep(0,length(lower)), Sigma=diag(length(lower)
       expr = gsub("\\<y\\>", "t", expr)
       expr = gsub("\\<w\\>", "t", expr)
       expr = gsub("\\<z\\>", "t", expr)
-      g_fun = yacas(expr)
-      g_fun2 = eval(parse(text = paste("function(t){resp = ",g_fun$text,";return(resp)}",sep="")))
-      res = try(g_fun2(quant), silent=TRUE)
+      g_fun2 = eval(parse(text = paste0("function(t) ", expr)))
+      res    = try(g_fun2(quant), silent=TRUE)
       if (is(res,"try-error") | res < 0) stop("expr must be a non-negative decreasing function depending only on t")
-      if (!is.decreasing(g_fun2, x.bound=c(0,quant), step = 0.01)) stop ("expr must be a decreasing function")
+      if (!is.decreasing(g_fun2, x.bound=c(0.001, quant), step = 0.01)) stop ("expr must be a decreasing function")
 
       # Inverse function t = g*(y)
-      g_inv = yacas(paste("Solve(", expr, " == y, t)",sep=""))
-      mre = length(g_inv$LinAlgForm)
-      if (mre == 0) stop("The inverse of expr could not be computed. Try with gFun")
-      g_inv1 = strsplit(g_inv$LinAlgForm, "==")[[1]][2]
-      g_inv2 = eval(parse(text = paste("function(y){resp =",g_inv1,";return(resp)}",sep="")))
-      res2 = try(g_inv2(res), silent=TRUE)
-      conta = 2
-      while ((is(res2,"try-error") | res2 < 0) & conta <= mre){
-        g_inv1 = strsplit(g_inv$LinAlgForm, "==")[[conta]][2]
-        g_inv2 = eval(parse(text = paste("function(y){resp =",g_inv1,";return(resp)}",sep="")))
-        res2 = try(g_inv2(res), silent=TRUE)
-        conta = conta + 1
+      to_yacas <- function(s) {
+        s <- gsub("\\bexp\\s*\\(", "Exp(", s, ignore.case = TRUE)
+        s <- gsub("\\blog\\s*\\(", "Ln(", s, ignore.case = TRUE)
+        s <- gsub("\\blog10\\s*\\(", "Log10(", s, ignore.case = TRUE)
+        s <- gsub("\\blog2\\s*\\(", "Log2(", s, ignore.case = TRUE)
+        s <- gsub("\\bsqrt\\s*\\(", "Sqrt(", s, ignore.case = TRUE)
+        s <- gsub("\\babs\\s*\\(", "Abs(", s, ignore.case = TRUE)
+        s <- gsub("\\bsin\\s*\\(", "Sin(", s, ignore.case = TRUE)
+        s <- gsub("\\bcos\\s*\\(", "Cos(", s, ignore.case = TRUE)
+        s <- gsub("\\btan\\s*\\(", "Tan(", s, ignore.case = TRUE)
+        s <- gsub("\\basin\\s*\\(", "ArcSin(", s, ignore.case = TRUE)
+        s <- gsub("\\bacos\\s*\\(", "ArcCos(", s, ignore.case = TRUE)
+        s <- gsub("\\batan\\s*\\(", "ArcTan(", s, ignore.case = TRUE)
+        return(s)
       }
-      if (is(res2,"try-error") | res2 < 0) stop ("The inverse of expr could not be computed. Try with gFun")
+      g_inv = yac(paste0("Solve(", to_yacas(expr), " == y, t)"))
+      eval1 = y_eval(ysym(y_rmvars(g_inv)), y=res, as.r=TRUE)
+      if (is.null(eval1)) stop("The inverse of expr could not be computed. Try with gFun")
+      if (!is.numeric(eval1)) stop("The inverse of expr could not be computed. Try with gFun")
+
+      g_inv1 = ysym(y_rmvars(g_inv))
+      g_inv1 = g_inv1$yacas_cmd
+      if (length(eval1) > 1){ g_inv1 <- sub(",.*", "}", g_inv1) }
+
+      to_R <- function(s) {
+        s <- gsub("\\bExp\\s*\\(", "exp(", s, ignore.case = TRUE)
+        s <- gsub("\\bLn\\s*\\(", "log(", s, ignore.case = TRUE)
+        s <- gsub("\\bLog10\\s*\\(", "log10(", s, ignore.case = TRUE)
+        s <- gsub("\\bLog2\\s*\\(", "log2(", s, ignore.case = TRUE)
+        s <- gsub("\\bSqrt\\s*\\(", "sqrt(", s, ignore.case = TRUE)
+        s <- gsub("\\bAbs\\s*\\(", "abs(", s, ignore.case = TRUE)
+        s <- gsub("\\bSin\\s*\\(", "sin(", s, ignore.case = TRUE)
+        s <- gsub("\\bCos\\s*\\(", "cos(", s, ignore.case = TRUE)
+        s <- gsub("\\bTan\\s*\\(", "tan(", s, ignore.case = TRUE)
+        s <- gsub("\\bArcSin\\s*\\(", "asin(", s, ignore.case = TRUE)
+        s <- gsub("\\bArcCos\\s*\\(", "acos(", s, ignore.case = TRUE)
+        s <- gsub("\\bArcTan\\s*\\(", "atan(", s, ignore.case = TRUE)
+        return(s)
+      }
+      g_inv2 = eval(parse(text = paste0("function(y) ", to_R(g_inv1))))
+      if (g_inv2(res) < 0) stop("The inverse of expr could not be computed. Try with gFun")
 
       out = randomG(n, mu, Sigma, lower, upper, g_fun2, g_inv2, burn.in, thinning)
 
@@ -314,12 +359,9 @@ rtelliptical = function(n=1e4, mu=rep(0,length(lower)), Sigma=diag(length(lower)
                         }
                       }
                     }
+
                   } else {
-                    if (dist=="Laplace"){
-                      out = rtPE(n, 0.5, mu, Sigma, lower, upper, burn.in, thinning)
-                    } else {
-                      stop ("The dist values are `Normal`, `t`, `Laplace`, `PE`, `PVII`, `Slash`, and `CN`")
-                    } # End Laplace
+                    stop ("The dist values are Normal, t, PE, PVII, Slash, CN")
                   } # End CN
                 } # End Slash
               } # End PVII
@@ -327,7 +369,7 @@ rtelliptical = function(n=1e4, mu=rep(0,length(lower)), Sigma=diag(length(lower)
           } # End t
         } # End Normal
       } else {
-        stop ("The dist values are `Normal`, `t`, `Laplace`, `PE`, `PVII`, `Slash`, and `CN`, or provide a function through `expr` or `gFun`")
+        stop ("The dist values are Normal, t, PE, PVII, Slash, CN, or provide a function through expr or gFun")
       } # End dist
     } # End expr
   } # End gFun

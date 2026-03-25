@@ -2,7 +2,7 @@
 
 export(mvtelliptical)
 export(rtelliptical)
-import(Ryacas0)
+import(Ryacas)
 importFrom(FuzzyNumbers.Ext.2,is.decreasing)
 importFrom(Rcpp,sourceCpp)
 importFrom(Rdpack,reprompt)

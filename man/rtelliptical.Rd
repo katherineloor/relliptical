@@ -22,8 +22,8 @@ scale parameter.}
 \item{upper}{vector of upper truncation points of length \eqn{p}.}
 
 \item{dist}{represents the truncated distribution to be used. The values are \code{'Normal'},
-\code{'t'}, \code{'Laplace'}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
-Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distribution, respectively.}
+\code{'t'}, \code{'PE'}, \code{'PVII'}, \code{'Slash'}, and \code{'CN'} for the truncated Normal, Student-t,
+Power Exponential, Pearson VII, Slash, and Contaminated Normal distribution, respectively.}
 
 \item{nu}{additional parameter or vector of parameters depending on the
 density generating function. See Details.}
@@ -43,41 +43,56 @@ density generating function. See Details.}
 It returns a matrix of dimensions \eqn{n}x\eqn{p} with the random points sampled.
 }
 \description{
-This function generates observations from a truncated multivariate elliptical distribution
-with location parameter \code{mu}, scale matrix \code{Sigma}, lower and upper
-truncation points \code{lower} and \code{upper} via Slice Sampling algorithm with Gibbs sampler steps.
+The sampling procedure is based on a Slice Sampling algorithm combined with
+Gibbs sampling steps. The distribution is characterized by a location parameter
+\code{mu}, a scale matrix \code{Sigma}, and lower and upper truncation bounds
+specified by \code{lower} and \code{upper}, respectively.
 }
 \details{
-The \code{dist} argument represents the truncated distribution to be used. The values are
-\code{Normal}, \code{t}, \code{'t'}, \code{PE}, \code{PVII}, \code{Slash}, and \code{CN}, for the
-truncated Normal, Student-t, Laplace, Power Exponential, Pearson VII, Slash, and Contaminated Normal distribution,
-respectively.
+The argument \code{dist} specifies the truncated distribution to be used and
+accepts the values \code{"Normal"}, \code{"t"}, \code{"PE"}, \code{"PVII"},
+\code{"Slash"}, and \code{"CN"}, corresponding to the truncated Normal,
+Student-t, Power Exponential, Pearson type VII, Slash, and Contaminated Normal
+distributions, respectively.
 
-The argument \code{nu} is a parameter or vector of parameters depending on the density generating
-function (DGF). For the truncated Student-t, Power Exponential, and Slash distribution, \code{nu} is a
-positive number. For the truncated Pearson VII, \code{nu} is a vector with the first element greater than
-\eqn{p/2} and the second element a positive number. For the truncated Contaminated Normal distribution,
-\code{nu} is a vector of length 2 assuming values between 0 and 1.
+The argument \code{nu} denotes a parameter or a vector of parameters depending
+on the underlying density generating function (DGF). For the truncated
+Student-t, Power Exponential, and Slash distributions, \code{nu} must be a
+positive scalar. For the truncated Pearson type VII distribution, \code{nu}
+is a vector of length two, where the first element must be greater than
+\eqn{p/2} and the second element must be strictly positive. For the truncated
+Contaminated Normal distribution, \code{nu} is a vector of length two with
+components taking values in the interval \eqn{(0,1)}.
 
-This function also allows generating random numbers from other truncated elliptical distributions not specified
-in the \code{dist} argument, by supplying the density generating function (DGF) through arguments either
-\code{expr} or \code{gFun}. The DGF must be a non-negative and strictly decreasing function on \code{(0, Inf)}.
-The easiest way is to provide the DGF expression to argument \code{expr} as a character. The notation used in
-\code{expr} needs to be understood by package \code{Ryacas0}, and the environment of \code{R}. For instance,
-for the DGF \eqn{g(t)=e^{-t}}, the user must provide \code{expr = "exp(1)^(-t)"}. See that the function must depend
-only on variable \eqn{t}, and any additional parameter must be passed as a fixed value. For this case, when a character
-expression is provided to \code{expr}, the algorithm tries to compute a closed-form expression for the inverse function
-of \eqn{g(t)}, however, this is not always possible (a warning message is returned). See example 2.
+This function also supports random number generation from truncated elliptical
+distributions not explicitly listed in the \code{dist} argument by supplying
+the density generating function (DGF) through either the \code{expr} or
+\code{gFun} arguments. The DGF must be a non-negative and strictly decreasing
+function on \eqn{(0,\infty)}.
 
-If it was no possible to generate random samples by passing a character expression to \code{expr}, the user may provide
-a custom \code{R} function to the \code{gFun} argument. By default, its inverse function is approximated numerically,
-however, the user may also provide its inverse to the \code{ginvFun} argument to gain some computational time.
-When \code{gFun} is provided, arguments \code{dist} and \code{expr} are ignored.
+The simplest approach is to provide the DGF to the \code{expr} argument as a
+character string. The notation used in \code{expr} must be compatible with both
+the \pkg{Ryacas} package and the \pkg{R} evaluation environment. For example,
+for the DGF \eqn{g(t) = e^{-t}}, the user should specify
+\code{expr = "exp(-t)"}. The expression must depend only on the variable
+\eqn{t}; any additional parameters must be supplied as fixed values.
+When a character expression is provided via \code{expr}, the algorithm attempts
+to compute a closed-form expression for the inverse of \eqn{g(t)}. Since such an
+expression may not always exist, a warning is issued whenever the inversion
+cannot be obtained analytically (see Example 2).
+
+If random samples cannot be generated using a character expression supplied to
+\code{expr}, the user may instead provide a custom \pkg{R} function through the
+\code{gFun} argument. By default, the inverse of this function is approximated
+numerically; however, for improved computational efficiency, the user may
+optionally provide its inverse via the \code{ginvFun} argument. When \code{gFun}
+is supplied, the arguments \code{dist} and \code{expr} are ignored.
 }
 \note{
-The Normal distribution is a particular case of the Power Exponential distribution when \code{nu = 1}.
-The Student-t distribution with \eqn{\nu} degrees of freedom results from the Pearson VII
-distribution when \code{nu = } ((\eqn{\nu}+p)/2, \eqn{\nu}).
+The Normal distribution is a special case of the Power Exponential distribution
+obtained when \code{nu = 1}. The Student-t distribution with \eqn{\nu} degrees of
+freedom arises as a particular case of the Pearson type VII distribution when
+\code{nu = } ((\eqn{\nu}+p)/2, \eqn{\nu}).
 }
 \examples{
 library(ggplot2)
@@ -94,13 +109,15 @@ sample1 = rtelliptical(5e4, mu, Sigma, lower, upper, dist="Normal")
 
 # Histogram and density for variable 1
 ggplot(data.frame(sample1), aes(x=X1)) +
-   geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
-   geom_density(color="red") + labs(x=bquote(X[1]), y="Density") + theme_bw()
+   geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
+   geom_density(color="red") + labs(x=bquote(X[1]), y="Density") +
+   theme_bw()
 
 # Histogram and density for variable 2
 ggplot(data.frame(sample1), aes(x=X2)) +
-   geom_histogram(aes(y=after_stat(density)), colour="black", fill="grey", bins=15) +
-   geom_density(color="red") + labs(x=bquote(X[2]), y="Density") + theme_bw()
+   geom_histogram(aes(y=..density..), colour="black", fill="grey", bins=15) +
+   geom_density(color="red") + labs(x=bquote(X[2]), y="Density") +
+   theme_bw()
 
 \donttest{
 # Example 2: Sampling from the Truncated Logistic distribution
@@ -112,7 +129,8 @@ acf.plot = function(samples){
    bacfdf = with(acf(samples[,i], plot=FALSE), data.frame(lag, acf))
    acf1[[i]] = ggplot(data=bacfdf, aes(x=lag,y=acf)) + geom_hline(aes(yintercept=0)) +
      geom_segment(aes(xend=lag, yend=0)) + labs(x="Lag", y="ACF", subtitle=bquote(X[.(i)])) +
-     geom_hline(yintercept=c(q1,-q1), color="red", linetype="twodash") + theme_bw()
+     geom_hline(yintercept=c(q1,-q1), color="red", linetype="twodash") +
+     theme_bw()
  }
  return (acf1)
 }
@@ -123,14 +141,14 @@ Sigma = matrix(c(1,0.70,0.70,1), 2, 2)
 lower = c(-2, -2)
 upper = c(3, 2)
 # Sample autocorrelation with no thinning
-sample2 = rtelliptical(10000, mu, Sigma, lower, upper, expr="exp(1)^(-t)/(1+exp(1)^(-t))^2")
+sample2 = rtelliptical(2000, mu, Sigma, lower, upper, expr="exp(-t)/(1+exp(-t))^2")
 grid.arrange(grobs=acf.plot(sample2), top="Logistic distribution with no thinning", nrow=1)
 
 # Sample autocorrelation with thinning = 3
-sample3 = rtelliptical(10000, mu, Sigma, lower, upper, expr="exp(1)^(-t)/(1+exp(1)^(-t))^2",
+sample3 = rtelliptical(2000, mu, Sigma, lower, upper, expr="exp(-t)/(1+exp(-t))^2",
                        thinning=3)
 grid.arrange(grobs=acf.plot(sample3), top="Logistic distribution with thinning = 3", nrow=1)
-}
+
 
 # Example 3: Sampling from the Truncated Kotz-type distribution
 set.seed(5678)
@@ -140,8 +158,9 @@ lower = c(-2, -2)
 upper = c(3, 2)
 sample4 = rtelliptical(2000, mu, Sigma, lower, upper, gFun=function(t){t^(-1/2)*exp(-2*t^(1/4))})
 f1 = ggplot(data.frame(sample4), aes(x=X1,y=X2)) + geom_point(size=0.50) +
-     labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)") + theme_bw()
-ggMarginal(f1, type="histogram", fill="grey")
+     labs(x=expression(X[1]), y=expression(X[2]), subtitle="Kotz(2,1/4,1/2)") +
+     theme_bw()
+ggMarginal(f1, type="histogram", fill="grey")}
 
 }
 \references{
@@ -154,7 +173,7 @@ ggMarginal(f1, type="histogram", fill="grey")
 
   \insertRef{robert2010introducing}{relliptical}
 
-  \insertRef{valeriano2023moments}{relliptical}
+  \insertRef{valeriano2021moments}{relliptical}
 }
 }
 \seealso{
